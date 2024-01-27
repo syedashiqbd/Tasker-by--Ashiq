@@ -92,12 +92,18 @@ const TaskBoard = () => {
             onAddClick={() => setShowTaskModal(true)}
             onDeleteClick={handleDeleteAllTask}
           />
-          <TaskList
-            tasks={tasks}
-            onEdit={handleEditTask}
-            onDelete={handleDeleteTask}
-            onFav={handleIsFavorite}
-          />
+          {tasks.length > 0 ? (
+            <TaskList
+              tasks={tasks}
+              onEdit={handleEditTask}
+              onDelete={handleDeleteTask}
+              onFav={handleIsFavorite}
+            />
+          ) : (
+            <p className="text-center text-3xl">
+              No Task Found. Please Add One
+            </p>
+          )}
         </div>
       </div>
     </section>
