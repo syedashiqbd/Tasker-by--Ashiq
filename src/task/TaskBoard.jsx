@@ -12,7 +12,7 @@ const TaskBoard = () => {
       'I want to learn React such than I can treat it like my slave and make it do whatever I want to do',
     tags: ['Web', 'React', 'Js'],
     priority: 'High',
-    isFavorite: true,
+    isFavorite: false,
   };
   const [tasks, setTasks] = useState([defaultTask]);
   const [showTaskModal, setShowTaskModal] = useState(false);
@@ -56,6 +56,16 @@ const TaskBoard = () => {
     setTasks([...tasks]);
   };
 
+  const handleIsFavorite = (taskId) => {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    const newTasks = [...tasks];
+
+    newTasks[taskIndex].isFavorite = !newTasks[taskIndex].isFavorite;
+
+    setTasks(newTasks);
+  };
+
   return (
     <section className="mb-20" id="tasks">
       {showTaskModal && (
@@ -79,6 +89,7 @@ const TaskBoard = () => {
             tasks={tasks}
             onEdit={handleEditTask}
             onDelete={handleDeleteTask}
+            onFav={handleIsFavorite}
           />
         </div>
       </div>
