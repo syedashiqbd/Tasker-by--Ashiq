@@ -46,6 +46,16 @@ const TaskBoard = () => {
     SetTaskToUpdate(null);
   };
 
+  const handleDeleteTask = (taskId) => {
+    const taskAfterDelete = tasks.filter((task) => task.id !== taskId);
+    setTasks(taskAfterDelete);
+  };
+
+  const handleDeleteAllTask = () => {
+    tasks.length = 0;
+    setTasks([...tasks]);
+  };
+
   return (
     <section className="mb-20" id="tasks">
       {showTaskModal && (
@@ -61,8 +71,15 @@ const TaskBoard = () => {
         </div>
 
         <div className="rounded-lg border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-          <TaskActions onAddClick={() => setShowTaskModal(true)} />
-          <TaskList tasks={tasks} onEdit={handleEditTask} />
+          <TaskActions
+            onAddClick={() => setShowTaskModal(true)}
+            onDeleteClick={handleDeleteAllTask}
+          />
+          <TaskList
+            tasks={tasks}
+            onEdit={handleEditTask}
+            onDelete={handleDeleteTask}
+          />
         </div>
       </div>
     </section>
